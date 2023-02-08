@@ -7,14 +7,14 @@ public class EnumForEntity {
     }
 
     public enum OrderType{
-        ship, takeAway
+        shipping, takeAway
     }
 
     public enum OrderStatus{
-        pending, shipping, shipped, cancelled
+        processed, shipping, completed, cancelled
     }
 
     public enum PaymentType{
-        cod, bank
+        cash, bank
     }
 }

@@ -6,18 +6,21 @@ import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "drink_option")
 @NoArgsConstructor
 @Getter
 @Setter
-public class Drink extends BaseEntity {
-
+public class DrinkOption extends BaseEntity {
     @Column
     private String name;
+
     @Column
     private BigDecimal price;
+
     @Column
     private String description;
 }

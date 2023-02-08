@@ -1,0 +1,59 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd">
+    <changeSet id="1.0" author="ducnh298">
+        <createTable schemaName="public"  tableName="user">
+            <column name="id" type="integer" autoIncrement="true">
+                <constraints primaryKey="true"></constraints>
+            </column>
+            <column name = "username" type="varchar(50)"></column>
+            <column name = "password" type="varchar(50)"></column>
+            <column name = "email" type="varchar(50)"></column>
+            <column name = "full_name" type="varchar(50)"></column>
+            <column name = "phone" type="varchar(50)"></column>
+            <column name = "date_of_birth" type="date">
+                <constraints nullable="true"></constraints>
+            </column>
+            <column name = "user_type" type="integer"></column>
+            <column name = "created_date" type="timestamp"></column>
+            <column name = "modified_date" type="timestamp"></column>
+            <column name = "created_by" type="varchar(50)"></column>
+            <column name = "modified_by" type="varchar(50)"></column>
+        </createTable>
+
+        <createTable schemaName="public"  tableName="drink">
+            <column name="id" type="integer" autoIncrement="true">
+                <constraints primaryKey="true"></constraints>
+            </column>
+            <column name = "name" type="varchar(50)"></column>
+            <column name = "price" type="decimal"></column>
+            <column name = "desciption" type="varchar(100)">
+                <constraints nullable="true"></constraints>
+            </column>
+            <column name = "created_date" type="timestamp"></column>
+            <column name = "modified_date" type="timestamp"></column>
+            <column name = "created_by" type="varchar(50)"></column>
+            <column name = "modified_by" type="varchar(50)"></column>
+        </createTable>
+
+        <createTable schemaName="public"  tableName="drink-option">
+            <column name="id" type="integer" autoIncrement="true">
+                <constraints primaryKey="true"></constraints>
+            </column>
+            <column name = "name" type="varchar(50)"></column>
+            <column name = "price" type="decimal"></column>
+            <column name = "desciption" type="varchar(100)">
+                <constraints nullable="true"></constraints>
+            </column>
+            <column name = "created_date" type="timestamp"></column>
+            <column name = "modified_date" type="timestamp"></column>
+            <column name = "created_by" type="varchar(50)"></column>
+            <column name = "modified_by" type="varchar(50)"></column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

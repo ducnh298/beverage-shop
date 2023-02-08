@@ -17,9 +17,13 @@ import java.util.List;
 @Setter
 public class Order extends BaseEntity{
 
-    @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private User customer;
+
+    @ManyToOne
+    @JoinColumn(name = "cashier_id", nullable = false)
+    private User cashier;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order")
     private List<OrderedDrink> listDrinks;
@@ -38,4 +42,10 @@ public class Order extends BaseEntity{
 
     @Column
     private PaymentType  paymentType;
+
+    @Column
+    private Boolean isPaid;
+
+    @Column
+    private String note;
 }
