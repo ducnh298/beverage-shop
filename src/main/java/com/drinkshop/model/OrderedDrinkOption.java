@@ -15,7 +15,7 @@ public class OrderedDrinkOption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "ordered_drink_id")

@@ -1,19 +1,21 @@
-package com.drinkshop.services;
+package com.drinkshop.services.impl;
 
 import com.drinkshop.model.User;
 import com.drinkshop.repository.UserRepository;
+import com.drinkshop.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements IUserService {
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
-    public List<User> findAll(){
+    @Override
+    public List<User> findAll() {
         return userRepository.findAll();
     }
 }
