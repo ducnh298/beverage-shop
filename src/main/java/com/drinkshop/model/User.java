@@ -5,9 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
@@ -36,6 +34,7 @@ public class User extends BaseEntity {
     private Date dateOfBirth;
 
     @Column
+    @Enumerated(EnumType.ORDINAL)
     private EnumForEntity.UserType userType;
 
 }
