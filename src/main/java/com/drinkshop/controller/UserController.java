@@ -1,5 +1,6 @@
 package com.drinkshop.controller;
 
+import com.drinkshop.dto.UserDTO;
 import com.drinkshop.model.User;
 import com.drinkshop.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,13 @@ public class UserController {
     IUserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAll(){
+    public ResponseEntity<List<UserDTO>> getAll() {
         return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        return  new ResponseEntity<>(userService.saveOrUpdate(user),HttpStatus.OK);
+    public ResponseEntity<UserDTO> createUser(@RequestBody User user) {
+        user.setId(null);
+        return new ResponseEntity<>(userService.saveOrUpdate(user), HttpStatus.OK);
     }
 }

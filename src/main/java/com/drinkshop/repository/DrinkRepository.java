@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface DrinkRepository extends JpaRepository<Drink,Integer> {
     List<Drink> findAll();
+
+    Drink save(Drink drink);
 }

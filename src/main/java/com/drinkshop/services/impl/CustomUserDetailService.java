@@ -1,6 +1,7 @@
 package com.drinkshop.services.impl;
 
 import com.drinkshop.model.User;
+import com.drinkshop.repository.UserRepository;
 import com.drinkshop.services.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,11 +16,11 @@ import java.util.Set;
 public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
-    IUserService userService;
+    UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.findByUsername(username);
+        User user = userRepository.findByUsername(username);
         if(user == null){
             System.out.println("User not found "+username);
             throw new UsernameNotFoundException("User "+username+" not found in the database!");

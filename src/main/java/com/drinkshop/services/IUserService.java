@@ -1,12 +1,13 @@
 package com.drinkshop.services;
 
+import com.drinkshop.dto.UserDTO;
 import com.drinkshop.model.User;
 
 import java.util.List;
 
 public interface IUserService {
-     List<User> findAll();
-     User findByUsername(String username);
+     List<UserDTO> findAll();
+     UserDTO findByUsername(String username);
 
-     User saveOrUpdate(User user);
+     UserDTO saveOrUpdate(User user);
 }

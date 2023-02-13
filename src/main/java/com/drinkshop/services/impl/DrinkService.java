@@ -1,16 +1,36 @@
 package com.drinkshop.services.impl;
 
+import com.drinkshop.dto.DrinkDTO;
+import com.drinkshop.mapper.DrinkMapper;
 import com.drinkshop.model.Drink;
+import com.drinkshop.repository.DrinkRepository;
 import com.drinkshop.services.IDrinkService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class DrinkService implements IDrinkService{
+public class DrinkService implements IDrinkService {
+
+    @Autowired
+    DrinkRepository drinkRepository;
+
+    @Autowired
+    ModelMapper modelMapper;
+
+    @Autowired
+    DrinkMapper drinkMapper;
 
     @Override
-    public List<Drink> findAll() {
-        return null;
+    public List<DrinkDTO> findAll() {
+        return drinkMapper.toDTOs(drinkRepository.findAll());
     }
+
+    @Override
+    public DrinkDTO saveOrUpdate(Drink drink) {
+        return modelMapper.map(drinkRepository.save(drink),DrinkDTO.class);
+    }
+
 }

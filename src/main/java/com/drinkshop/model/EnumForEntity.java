@@ -11,10 +11,14 @@ public class EnumForEntity {
     }
 
     public enum OrderStatus{
-        processed, shipping, completed, cancelled
+        processed, ready, shipping, completed, cancelled
     }
 
     public enum PaymentType{
         cash, bank
+    }
+
+    public enum DrinkSize{
+        S,M,L
     }
 }

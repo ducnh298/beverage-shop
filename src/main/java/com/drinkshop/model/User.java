@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 
 @Entity
 @Table(name = "user", schema = "public")
@@ -31,6 +31,7 @@ public class User extends BaseEntity {
     private String phone;
 
     @Column
+    @Temporal(TemporalType.DATE)
     private Date dateOfBirth;
 
     @Column

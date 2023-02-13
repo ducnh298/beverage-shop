@@ -1,7 +1,16 @@
 package com.drinkshop.repository;
 
+import com.drinkshop.dto.DrinkOptionDTO;
 import com.drinkshop.model.DrinkOption;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface DrinkOptionRepository extends JpaRepository<DrinkOption,Integer> {
+import java.util.List;
+
+@Repository
+public interface DrinkOptionRepository extends CrudRepository<DrinkOption, Integer> {
+
+    List<DrinkOption> findAll();
+
+    DrinkOption save(DrinkOption drinkOption);
 }
