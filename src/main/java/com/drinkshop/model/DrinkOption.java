@@ -1,8 +1,6 @@
 package com.drinkshop.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,9 +9,7 @@ import java.math.BigDecimal;
 
 @Entity
 @Table(name = "drink_option")
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 public class DrinkOption extends BaseEntity {
     @Column
     private String name;

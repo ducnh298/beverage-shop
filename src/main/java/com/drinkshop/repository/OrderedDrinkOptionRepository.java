@@ -1,7 +1,8 @@
 package com.drinkshop.repository;
 
 import com.drinkshop.model.OrderedDrinkOption;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface OrderedDrinkOptionRepository extends JpaRepository<OrderedDrinkOption,Integer> {
+public interface OrderedDrinkOptionRepository extends CrudRepository<OrderedDrinkOption,Integer> {
+    OrderedDrinkOption save(OrderedDrinkOption orderedDrinkOption);
 }

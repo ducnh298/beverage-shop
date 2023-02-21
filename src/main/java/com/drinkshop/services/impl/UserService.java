@@ -34,6 +34,11 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public User findById(int id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
     public UserDTO saveOrUpdate(User user) {
         return modelMapper.map(userRepository.save(user), UserDTO.class);
     }

@@ -1,7 +1,6 @@
 package com.drinkshop.services.impl;
 
 import com.drinkshop.dto.DrinkOptionDTO;
-import com.drinkshop.mapper.DrinkMapper;
 import com.drinkshop.mapper.DrinkOptionMapper;
 import com.drinkshop.model.DrinkOption;
 import com.drinkshop.repository.DrinkOptionRepository;
@@ -23,13 +22,19 @@ public class DrinkOptionService implements IDrinkOptionService {
 
     @Autowired
     DrinkOptionMapper drinkOptionMapper;
+
     @Override
     public List<DrinkOptionDTO> findAll() {
         return drinkOptionMapper.toDTOs(drinkOptionRepository.findAll());
     }
 
     @Override
+    public DrinkOption findById(int id) {
+        return drinkOptionRepository.findById(id);
+    }
+
+    @Override
     public DrinkOptionDTO saveOrUpdate(DrinkOption drinkOption) {
-        return modelMapper.map(drinkOptionRepository.save(drinkOption),DrinkOptionDTO.class);
+        return modelMapper.map(drinkOptionRepository.save(drinkOption), DrinkOptionDTO.class);
     }
 }

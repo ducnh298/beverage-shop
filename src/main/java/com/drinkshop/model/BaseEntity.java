@@ -1,5 +1,6 @@
 package com.drinkshop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedBy;
@@ -16,22 +17,27 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 public abstract class BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonIgnore
     @Column
     @CreatedDate
     private Timestamp createdDate;
 
+    @JsonIgnore
     @Column
     @CreatedBy
     private String createdBy;
 
+    @JsonIgnore
     @Column
     @LastModifiedDate
     private Timestamp modifiedDate;
 
+    @JsonIgnore
     @Column
     @LastModifiedBy
     private String modifiedBy;

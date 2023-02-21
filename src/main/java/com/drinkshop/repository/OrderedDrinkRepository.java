@@ -1,7 +1,12 @@
 package com.drinkshop.repository;
 
 import com.drinkshop.model.OrderedDrink;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface OrderedDrinkRepository extends JpaRepository<OrderedDrink,Integer> {
+import java.util.List;
+
+public interface OrderedDrinkRepository extends CrudRepository<OrderedDrink,Integer> {
+    List<OrderedDrink> findAll();
+
+    OrderedDrink save(OrderedDrink orderedDrink);
 }

@@ -9,5 +9,7 @@ public interface IUserService {
      List<UserDTO> findAll();
      UserDTO findByUsername(String username);
 
+     User findById(int id);
+
      UserDTO saveOrUpdate(User user);
 }

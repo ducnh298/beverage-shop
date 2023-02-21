@@ -7,7 +7,7 @@ public class EnumForEntity {
     }
 
     public enum OrderType{
-        shipping, takeAway
+        takeAway, shipping
     }
 
     public enum OrderStatus{
@@ -19,6 +19,15 @@ public class EnumForEntity {
     }
 
     public enum DrinkSize{
-        S,M,L
+        S(0),M(1),L(2);
+        private final int value;
+
+        DrinkSize(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
     }
 }

@@ -29,6 +29,11 @@ public class DrinkService implements IDrinkService {
     }
 
     @Override
+    public Drink findById(int id) {
+        return drinkRepository.findById(id);
+    }
+
+    @Override
     public DrinkDTO saveOrUpdate(Drink drink) {
         return modelMapper.map(drinkRepository.save(drink),DrinkDTO.class);
     }

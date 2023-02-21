@@ -3,20 +3,24 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
-    <changeSet id="1.0" author="ducnh298">
-        <createTable schemaName="public"  tableName="order">
+    <changeSet id="1.1 Create table order, ordered_drink, ordered_drink_option" author="ducnh298">
+        <createTable schemaName="public"  tableName="orders">
             <column name="id" type="integer" autoIncrement="true">
                 <constraints primaryKey="true"></constraints>
             </column>
-            <column name = "customer_id" type="integer"></column>
-            <column name = "cashier_id" type="integer"></column>
-            <column name = "order_type" type="integer"></column>
+            <column name = "customer_id" type="integer">
+                <constraints nullable="false" foreignKeyName="fk_order_customer" references="user(id)"></constraints>
+            </column>
+            <column name = "cashier_id" type="integer">
+                <constraints nullable="false" foreignKeyName="fk_order_cashier" references="user(id)"></constraints>
+            </column>
+            <column name = "order_type" type="integer" defaultValue="0"></column>
             <column name = "order_status" type="integer" defaultValue="0"></column>
-            <column name = "total" type="decimal"></column>
+            <column name = "total" type="decimal" defaultValue="0"></column>
             <column name = "shipping_cost" type="decimal" defaultValue="0"></column>
-            <column name = "payment_type" type="integer"></column>
+            <column name = "payment_type" type="integer" defaultValue="0"></column>
             <column name = "is_paid" type="boolean" defaultValue="false"></column>
-            <column name = "note" type="varchar(100)">
+            <column name = "note" type="varchar(300)">
                 <constraints nullable="true"></constraints>
             </column>
             <column name = "created_date" type="timestamp"></column>
@@ -29,27 +33,29 @@
             <column name="id" type="integer" autoIncrement="true">
                 <constraints primaryKey="true"></constraints>
             </column>
-            <column name = "order_id" type="integer"></column>
-            <column name = "drink_id" type="integer"></column>
+            <column name = "order_id" type="integer">
+                <constraints nullable="false" foreignKeyName="fk_ordereddrink_order" references="orders(id)"></constraints>
+            </column>
+            <column name = "drink_id" type="integer">
+                <constraints nullable="false" foreignKeyName="fk_ordereddrink_drink" references="drink(id)"></constraints>
+            </column>
+            <column name = "drink_size" type="integer" defaultValue="0"></column>
             <column name = "quantity" type="integer" defaultValue="1"></column>
             <column name = "percent_ice" type="integer" defaultValue="100"></column>
             <column name = "percent_sugar" type="integer" defaultValue="100"></column>
-            <column name = "created_date" type="timestamp"></column>
-            <column name = "modified_date" type="timestamp"></column>
-            <column name = "created_by" type="varchar(50)"></column>
-            <column name = "modified_by" type="varchar(50)"></column>
         </createTable>
 
         <createTable schemaName="public"  tableName="ordered_drink_option">
             <column name="id" type="integer" autoIncrement="true">
                 <constraints primaryKey="true"></constraints>
             </column>
-            <column name = "ordered_drink_id" type="integer"></column>
-            <column name = "drink_option_id" type="integer"></column>
-            <column name = "created_date" type="timestamp"></column>
-            <column name = "modified_date" type="timestamp"></column>
-            <column name = "created_by" type="varchar(50)"></column>
-            <column name = "modified_by" type="varchar(50)"></column>
+            <column name = "ordered_drink_id" type="integer">
+                <constraints nullable="false" foreignKeyName="fk_ordereddrinkoption_ordereddrink" references="ordered_drink(id)"></constraints>
+            </column>
+            <column name = "drink_option_id" type="integer">
+                <constraints nullable="false" foreignKeyName="fk_ordereddrinkoption_drinkoption" references="drink_option(id)"></constraints>
+            </column>
+            <column name = "quantity" type="integer" defaultValue="1"></column>
         </createTable>
 
     </changeSet>

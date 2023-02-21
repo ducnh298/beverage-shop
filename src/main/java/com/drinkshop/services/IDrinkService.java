@@ -8,5 +8,7 @@ import java.util.List;
 public interface IDrinkService {
     List<DrinkDTO> findAll();
 
+    Drink findById(int id);
+
     DrinkDTO saveOrUpdate(Drink drink);
 }

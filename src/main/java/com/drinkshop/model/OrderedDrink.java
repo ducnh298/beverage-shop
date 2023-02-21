@@ -1,18 +1,20 @@
 package com.drinkshop.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "ordered_drink")
-@NoArgsConstructor
-@Getter
-@Setter
-public class OrderedDrink extends BaseEntity {
+@Data
+public class OrderedDrink {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private Order order;
@@ -25,11 +27,15 @@ public class OrderedDrink extends BaseEntity {
     private List<OrderedDrinkOption> orderedDrinkOptionList;
 
     @Column
-    private int quantity;
+    @Enumerated(EnumType.ORDINAL)
+    private EnumForEntity.DrinkSize drinkSize = EnumForEntity.DrinkSize.S;
 
     @Column
-    private int percentIce;
+    private int quantity = 1;
 
     @Column
-    private int percentSugar;
+    private int percentIce = 100;
+
+    @Column
+    private int percentSugar = 100;
 }
