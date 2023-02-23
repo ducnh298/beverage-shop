@@ -1,0 +1,36 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+    <changeSet id="1.2 Create table address" author="ducnh298">
+        <createTable schemaName="public"  tableName="address">
+            <column name="id" type="integer" autoIncrement="true">
+                <constraints primaryKey="true"></constraints>
+            </column>
+            <column name = "user_id" type="integer">
+                <constraints nullable="false" foreignKeyName="fk_address_user" references="user(id)"></constraints>
+            </column>
+            <column name = "address_line" type="varchar(100)">
+                <constraints nullable="true"></constraints>
+            </column>
+            <column name = "ward" type="varchar(100)">
+                <constraints nullable="true"></constraints>
+            </column>
+            <column name = "district" type="varchar(100)">
+                <constraints nullable="true"></constraints>
+            </column>
+            <column name = "province" type="varchar(100)">
+                <constraints nullable="true"></constraints>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1.2 Add address field into orders" author="ducnh298">
+        <addColumn tableName="orders">
+            <column name="address_id" type="integer">
+                <constraints foreignKeyName="fk_order_addresss" references="address(id)"></constraints>
+            </column>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

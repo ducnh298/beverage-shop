@@ -1,15 +1,11 @@
 package com.drinkshop.dto;
 
 import com.drinkshop.model.EnumForEntity;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.sql.Date;
 
-@Getter
-@Setter
-@NoArgsConstructor
+@Data
 public class UserDTO extends BaseDTO {
     private String username;
 
