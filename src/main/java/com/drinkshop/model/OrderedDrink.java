@@ -6,7 +6,8 @@ import lombok.Data;
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "ordered_drink")
+@Entity
+@Table(name = "ordered_drink", schema = "public")
 @Data
 public class OrderedDrink {
 

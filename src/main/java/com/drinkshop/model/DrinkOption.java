@@ -8,7 +8,7 @@ import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "drink_option")
+@Table(schema = "public")
 @Data
 public class DrinkOption extends BaseEntity {
     @Column

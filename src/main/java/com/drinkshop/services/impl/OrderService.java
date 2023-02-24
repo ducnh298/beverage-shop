@@ -51,7 +51,7 @@ public class OrderService implements IOrderService {
             order.setCustomer(userService.findById(order.getCustomer().getId()));
             order.setCashier(userService.findById(order.getCashier().getId()));
             int orderId = orderRepository.save(order).getId();
-            if (order.getDrinkList() != null && order.getDrinkList().isEmpty())
+            if (order.getDrinkList() != null && !order.getDrinkList().isEmpty())
                 orderedDrinkService.saveAll(order.getDrinkList(), orderId);
             order.setTotal(updateOrderTotal(orderId));
             return modelMapper.map(order,OrderDTO.class);

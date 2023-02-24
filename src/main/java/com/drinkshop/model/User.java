@@ -1,19 +1,13 @@
 package com.drinkshop.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "user", schema = "public")
-@NoArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 public class User extends BaseEntity {
     @Column
     private String username;

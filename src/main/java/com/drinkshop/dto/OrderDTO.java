@@ -1,6 +1,7 @@
 package com.drinkshop.dto;
 
 import com.drinkshop.model.EnumForEntity;
+import com.drinkshop.model.OrderExtraData;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
@@ -26,13 +27,13 @@ public class OrderDTO extends BaseDTO {
 
     private List<OrderedDrinkDTO> drinkList;
 
+    private OrderExtraData orderExtraData;
+
     private EnumForEntity.OrderType orderType;
 
     private EnumForEntity.OrderStatus orderStatus;
 
     private BigDecimal total;
-
-    private BigDecimal shippingCost;
 
     private EnumForEntity.PaymentType paymentType;
 

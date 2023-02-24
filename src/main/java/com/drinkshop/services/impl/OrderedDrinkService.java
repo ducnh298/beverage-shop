@@ -34,7 +34,7 @@ public class OrderedDrinkService implements IOrderedDrinkService {
             orderedDrink.setDrink(drinkService.findById(orderedDrink.getDrink().getId()));
             int orderedDrinkId = orderedDrinkRepository.save(orderedDrink).getId();
 
-            if (orderedDrink.getOrderedDrinkOptionList() != null && orderedDrink.getOrderedDrinkOptionList().isEmpty()) {
+            if (orderedDrink.getOrderedDrinkOptionList() != null && !orderedDrink.getOrderedDrinkOptionList().isEmpty()) {
                 orderedDrinkOptionService.saveAll(orderedDrink.getOrderedDrinkOptionList(), orderedDrinkId);
             }
             return orderedDrinkId;

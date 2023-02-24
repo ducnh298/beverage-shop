@@ -17,7 +17,6 @@
             <column name = "order_type" type="integer" defaultValue="0"></column>
             <column name = "order_status" type="integer" defaultValue="0"></column>
             <column name = "total" type="decimal" defaultValue="0"></column>
-            <column name = "shipping_cost" type="decimal" defaultValue="0"></column>
             <column name = "payment_type" type="integer" defaultValue="0"></column>
             <column name = "is_paid" type="boolean" defaultValue="false"></column>
             <column name = "note" type="varchar(300)">

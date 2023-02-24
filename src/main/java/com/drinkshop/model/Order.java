@@ -4,12 +4,14 @@ import com.drinkshop.model.EnumForEntity.OrderStatus;
 import com.drinkshop.model.EnumForEntity.OrderType;
 import com.drinkshop.model.EnumForEntity.PaymentType;
 import lombok.Data;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.List;
 
-@Entity(name = "orders")
+@Entity
+@Table(name = "orders", schema = "public")
 @Data
 public class Order extends BaseEntity {
 
@@ -24,6 +26,10 @@ public class Order extends BaseEntity {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
     private List<OrderedDrink> drinkList;
 
+    @OneToOne(mappedBy = "order")
+    @Nullable
+    private OrderExtraData orderExtraData;
+
     @Column
     @Enumerated(EnumType.ORDINAL)
     private OrderType orderType = OrderType.takeAway;
@@ -34,9 +40,6 @@ public class Order extends BaseEntity {
 
     @Column
     private BigDecimal total = BigDecimal.valueOf(0);
-
-    @Column
-    private BigDecimal shippingCost = BigDecimal.valueOf(0);
 
     @Column
     @Enumerated(EnumType.ORDINAL)
