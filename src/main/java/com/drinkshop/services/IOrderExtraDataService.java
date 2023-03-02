@@ -7,5 +7,5 @@ public interface IOrderExtraDataService {
 
     AddressDTO findById(int id);
 
-    Integer saveOrUpdate(OrderExtraData address);
+    OrderExtraData saveOrUpdate(OrderExtraData address);
 }

@@ -1,5 +1,7 @@
 package com.drinkshop.controller;
 
+import com.drinkshop.dto.OrderForCalculatingShippingCost;
+import com.drinkshop.model.Order;
 import com.drinkshop.services.IShippingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,5 +38,15 @@ public class ShippingController {
     @GetMapping("/service")
     public ResponseEntity<Map<String, Object>> getService(@RequestBody Map<String, Integer> requestBody) {
         return new ResponseEntity<>(shippingService.getService(requestBody.get("fromDistrict"), requestBody.get("toDistrict")), HttpStatus.OK);
+    }
+
+    @GetMapping("/calculate-cost")
+    public ResponseEntity<Map<String, Object>> calculateCost(@RequestBody OrderForCalculatingShippingCost order) {
+        return new ResponseEntity<>(shippingService.calculateCost(order), HttpStatus.OK);
+    }
+
+    @GetMapping("/create-order")
+    public ResponseEntity<Map<String, Object>> createOrder(@RequestBody Order order) {
+        return new ResponseEntity<>(shippingService.createOrder(order), HttpStatus.OK);
     }
 }

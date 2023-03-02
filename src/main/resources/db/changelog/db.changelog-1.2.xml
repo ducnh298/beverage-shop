@@ -13,7 +13,9 @@
                              references="orders(id)"></constraints>
             </column>
             <column name="shipping_cost" type="decimal" defaultValue="0"></column>
-            <column name="ward_code" type="integer">
+            <column name="service_id" type="integer"></column>
+            <column name="service_type_id" type="integer" defaultValue="2"></column>
+            <column name="ward_code" type="varchar(30)">
                 <constraints nullable="false"></constraints>
             </column>
             <column name="district_id" type="integer">

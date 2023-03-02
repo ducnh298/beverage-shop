@@ -9,19 +9,17 @@
                 <constraints primaryKey="true"></constraints>
             </column>
             <column name = "customer_id" type="integer">
-                <constraints nullable="false" foreignKeyName="fk_order_customer" references="user(id)"></constraints>
+                <constraints foreignKeyName="fk_order_customer" references="user(id)"></constraints>
             </column>
             <column name = "cashier_id" type="integer">
-                <constraints nullable="false" foreignKeyName="fk_order_cashier" references="user(id)"></constraints>
+                <constraints foreignKeyName="fk_order_cashier" references="user(id)"></constraints>
             </column>
             <column name = "order_type" type="integer" defaultValue="0"></column>
             <column name = "order_status" type="integer" defaultValue="0"></column>
             <column name = "total" type="decimal" defaultValue="0"></column>
             <column name = "payment_type" type="integer" defaultValue="0"></column>
-            <column name = "is_paid" type="boolean" defaultValue="false"></column>
-            <column name = "note" type="varchar(300)">
-                <constraints nullable="true"></constraints>
-            </column>
+            <column name = "paid" type="boolean" defaultValue="false"></column>
+            <column name = "note" type="varchar(300)"></column>
             <column name = "created_date" type="timestamp"></column>
             <column name = "modified_date" type="timestamp"></column>
             <column name = "created_by" type="varchar(50)"></column>
