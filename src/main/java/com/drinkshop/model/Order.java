@@ -16,18 +16,17 @@ import java.util.List;
 public class Order extends BaseEntity {
 
     @ManyToOne
-    @JoinColumn(name = "customer_id", nullable = false)
+    @JoinColumn(name = "customer_id")
     private User customer;
 
     @ManyToOne
-    @JoinColumn(name = "cashier_id", nullable = false)
+    @JoinColumn(name = "cashier_id")
     private User cashier;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "order")
     private List<OrderedDrink> drinkList;
 
-    @OneToOne(mappedBy = "order")
-    @Nullable
+    @OneToOne(mappedBy = "order", orphanRemoval = true, cascade = CascadeType.ALL)
     private OrderExtraData orderExtraData;
 
     @Column
@@ -46,7 +45,7 @@ public class Order extends BaseEntity {
     private PaymentType paymentType = PaymentType.cash;
 
     @Column
-    private Boolean isPaid = false;
+    private Boolean paid = false;
 
     @Column
     private String note;

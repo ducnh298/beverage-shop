@@ -32,6 +32,11 @@ public class OrderController {
         return new ResponseEntity<>(orderService.saveOrUpdate(order), HttpStatus.OK);
     }
 
+    @PutMapping
+    public ResponseEntity<OrderDTO> updateOrder(@RequestBody Order order) {
+        return new ResponseEntity<>(orderService.saveOrUpdate(order), HttpStatus.OK);
+    }
+
     @PutMapping("/{id}/total")
     public ResponseEntity<BigDecimal> updateOrderTotal(@PathVariable(name = "id") int orderId) {
         return new ResponseEntity<>(orderService.updateOrderTotal(orderId), HttpStatus.OK);

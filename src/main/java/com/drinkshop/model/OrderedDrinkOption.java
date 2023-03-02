@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table(name = "ordered_drink_option", schema = "public")
 @Data
 public class OrderedDrinkOption {
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

@@ -21,4 +21,14 @@ public class DrinkOptionMapper {
         }
         return result;
     }
+
+    public DrinkOption mapExisting(DrinkOption drinkOption, DrinkOption oldDrinkOption) {
+        if (drinkOption.getName() != null)
+            oldDrinkOption.setName(drinkOption.getName());
+        if (drinkOption.getPrice() != null)
+            oldDrinkOption.setPrice(drinkOption.getPrice());
+        if (drinkOption.getDescription() != null)
+            oldDrinkOption.setDescription(drinkOption.getDescription());
+        return oldDrinkOption;
+    }
 }

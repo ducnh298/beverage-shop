@@ -2,10 +2,9 @@ package com.drinkshop.services.impl;
 
 import com.drinkshop.dto.OrderDTO;
 import com.drinkshop.mapper.OrderMapper;
-import com.drinkshop.model.Order;
-import com.drinkshop.model.OrderedDrink;
-import com.drinkshop.model.OrderedDrinkOption;
+import com.drinkshop.model.*;
 import com.drinkshop.repository.OrderRepository;
+import com.drinkshop.services.IOrderExtraDataService;
 import com.drinkshop.services.IOrderService;
 import com.drinkshop.services.IOrderedDrinkService;
 import com.drinkshop.services.IUserService;
@@ -28,6 +27,9 @@ public class OrderService implements IOrderService {
     IUserService userService;
 
     @Autowired
+    IOrderExtraDataService orderExtraDataService;
+
+    @Autowired
     ModelMapper modelMapper;
 
     @Autowired
@@ -48,14 +50,31 @@ public class OrderService implements IOrderService {
     @Override
     public OrderDTO saveOrUpdate(Order order) {
         if (order.getId() == null || order.getId() <= 0) {
-            order.setCustomer(userService.findById(order.getCustomer().getId()));
-            order.setCashier(userService.findById(order.getCashier().getId()));
+
+            if (order.getCustomer() != null)
+                order.setCustomer(userService.findById(order.getCustomer().getId()));
+            if (order.getCashier() != null)
+                order.setCashier(userService.findById(order.getCashier().getId()));
+
+            OrderExtraData orderExtraData = order.getOrderExtraData();
+            order.setOrderExtraData(null);
+
             int orderId = orderRepository.save(order).getId();
+
+            if (order.getOrderType().equals(EnumForEntity.OrderType.shipping) && orderExtraData != null) {
+                orderExtraData.setOrder(order);
+                order.setOrderExtraData(orderExtraDataService.saveOrUpdate(orderExtraData));
+            }
+
             if (order.getDrinkList() != null && !order.getDrinkList().isEmpty())
                 orderedDrinkService.saveAll(order.getDrinkList(), orderId);
+
             order.setTotal(updateOrderTotal(orderId));
-            return modelMapper.map(order,OrderDTO.class);
-        } else return null;
+        } else {
+            Order oldOrder = orderRepository.findById(order.getId()).orElse(null);
+            order = orderMapper.mapExisting(order,oldOrder);
+        }
+        return modelMapper.map(order, OrderDTO.class);
     }
 
     @Override
@@ -63,6 +82,7 @@ public class OrderService implements IOrderService {
         Order order = orderRepository.findById(orderId).orElse(new Order());
         BigDecimal orderTotal = new BigDecimal(0);
         for (OrderedDrink orderedDrink : order.getDrinkList()) {
+
             if (orderedDrink != null && orderedDrink.getDrink() != null) {
                 orderTotal = orderTotal.add(orderedDrink.getDrink().getPrice()
                         .multiply(BigDecimal.valueOf((orderedDrink.getDrinkSize().getValue() * 0.3) + 1))
@@ -73,6 +93,9 @@ public class OrderService implements IOrderService {
                 }
             }
         }
+        if (order.getOrderType().equals(EnumForEntity.OrderType.shipping) && order.getOrderExtraData() != null)
+            orderTotal = orderTotal.add(order.getOrderExtraData().getShippingCost());
+
         orderRepository.updateOrderTotal(orderTotal, order.getId());
         return orderTotal;
     }

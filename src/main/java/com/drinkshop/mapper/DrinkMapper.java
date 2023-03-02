@@ -21,4 +21,14 @@ public class DrinkMapper {
         }
         return result;
     }
+
+    public Drink mapExisting(Drink drink,Drink oldDrink){
+        if(drink.getName()!=null)
+            oldDrink.setName(drink.getName());
+        if(drink.getPrice()!=null)
+            oldDrink.setPrice(drink.getPrice());
+        if(drink.getDescription()!=null)
+            oldDrink.setDescription(drink.getDescription());
+        return oldDrink;
+    }
 }

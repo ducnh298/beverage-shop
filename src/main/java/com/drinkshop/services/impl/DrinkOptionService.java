@@ -35,6 +35,10 @@ public class DrinkOptionService implements IDrinkOptionService {
 
     @Override
     public DrinkOptionDTO saveOrUpdate(DrinkOption drinkOption) {
+        if (drinkOption.getId() != null && drinkOption.getId() > 0) {
+            DrinkOption oldDrinkOption = drinkOptionRepository.findById(drinkOption.getId()).orElse(null);
+            drinkOption = drinkOptionMapper.mapExisting(drinkOption, oldDrinkOption);
+        }
         return modelMapper.map(drinkOptionRepository.save(drinkOption), DrinkOptionDTO.class);
     }
 }

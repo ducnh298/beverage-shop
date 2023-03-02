@@ -40,6 +40,10 @@ public class UserService implements IUserService {
 
     @Override
     public UserDTO saveOrUpdate(User user) {
+        if (user.getId() != null && user.getId() > 0) {
+            User oldUser = userRepository.findById(user.getId());
+            user = userMapper.mapExisting(user, oldUser);
+        }
         return modelMapper.map(userRepository.save(user), UserDTO.class);
     }
 }

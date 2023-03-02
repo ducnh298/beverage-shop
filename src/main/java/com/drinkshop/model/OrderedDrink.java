@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 public class OrderedDrink {
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -24,7 +25,7 @@ public class OrderedDrink {
     @JoinColumn(name = "drink_id", nullable = false)
     private Drink drink;
 
-    @OneToMany(mappedBy = "orderedDrink", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "orderedDrink")
     private List<OrderedDrinkOption> orderedDrinkOptionList;
 
     @Column

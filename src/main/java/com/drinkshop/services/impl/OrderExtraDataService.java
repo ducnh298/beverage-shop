@@ -23,9 +23,9 @@ public class OrderExtraDataService implements IOrderExtraDataService {
     }
 
     @Override
-    public Integer saveOrUpdate(OrderExtraData address) {
-        if (address.getId() == null || address.getId() <= 0)
-            return orderExtraDataRepository.save(address).getId();
+    public OrderExtraData saveOrUpdate(OrderExtraData orderExtraData) {
+        if (orderExtraData.getId() == null || orderExtraData.getId() <= 0)
+            return orderExtraDataRepository.save(orderExtraData);
         return null;
     }
 }
