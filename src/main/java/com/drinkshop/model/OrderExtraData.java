@@ -48,4 +48,7 @@ public class OrderExtraData {
 
     @Column
     private String province;
+
+    @Column
+    private String shippingOrderCode;
 }

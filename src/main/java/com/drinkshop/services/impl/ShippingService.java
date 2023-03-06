@@ -5,6 +5,8 @@ import com.drinkshop.model.Order;
 import com.drinkshop.model.OrderedDrink;
 import com.drinkshop.model.OrderedDrinkOption;
 import com.drinkshop.services.IShippingService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -37,6 +39,8 @@ public class ShippingService implements IShippingService {
     private int drinkWeight;
     @Value("${drink.width}")
     private int drinkWidth;
+
+    private final Logger logger = LoggerFactory.getLogger(getClass());
 
     private final WebClient webClient;
 
@@ -178,7 +182,7 @@ public class ShippingService implements IShippingService {
         bodyMap.put("quantity", numberOfDrinks);
         bodyMap.put("Items", items);
 
-        return webClient.post().uri("/v2/shipping-order/create")
+        Map<String, Object> result = webClient.post().uri("/v2/shipping-order/create")
                 .header("token", ghnToken)
                 .header("shopId", ghnShopId + "")
                 .body(BodyInserters.fromValue(bodyMap))
@@ -186,5 +190,11 @@ public class ShippingService implements IShippingService {
                 .block()
                 .bodyToMono(Map.class)
                 .block();
+
+        logger.info(result.toString());
+
+        if (result.get("code").toString().equalsIgnoreCase("200"))
+            return result;
+        else return null;
     }
 }

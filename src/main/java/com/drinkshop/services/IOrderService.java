@@ -9,7 +9,7 @@ import java.util.List;
 public interface IOrderService {
     List<OrderDTO> findAll();
 
-    OrderDTO findById(Integer id);
+    <T> T findById(Integer id, Class<T> classType);
 
     OrderDTO saveOrUpdate(Order order);
 

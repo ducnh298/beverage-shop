@@ -24,7 +24,7 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public ResponseEntity<OrderDTO> getOne(@PathVariable int id) {
-        return new ResponseEntity<>(orderService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(orderService.findById(id, OrderDTO.class), HttpStatus.OK);
     }
 
     @PostMapping
